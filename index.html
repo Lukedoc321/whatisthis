@@ -85,25 +85,32 @@
     "https://imgur.com/JKpp65d.png",
     "https://imgur.com/547C7dG.png",
     "https://imgur.com/vSN6fC1.png",
-    "https://imgur.com/7AgbyBj.png",
-    "https://imgur.com/lw9DeJs.png"
+    "https://imgur.com/7AgbyBj.png"
     ];
     var currentImage = 0; //defaults to image1.jpg
 
     function goNext() {
         currentImage += 1;
+
+        if(currentImage >= images.length) {
+          currentImage = 0;
+        }
+
         document.getElementById("secretpicture").src = images[currentImage];
+
     }
 
     function goBack() {
         currentImage -= 1;
 
-        //loop back to the first image
-        if(currentImage <= 0) {
-            currentImage = 0;
+        //loop back to final image
+        if(currentImage < 0) {
+            currentImage = images.length - 1;
         }
 
         document.getElementById("secretpicture").src = images[currentImage];
+
+
     }
 
   </script>
