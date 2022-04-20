@@ -2,7 +2,9 @@ body {
   background-color: #ffffff;
   display: flex;
   align-content: space-around;
-  margin-top: 2%;
+  /*margin-top: 2%;*/
+  height: 100%;
+  margin: 0; //Stops scroll bar from appearing
 }
 
 #secret {
@@ -35,6 +37,7 @@ h2 {
 
 #buttons {
   padding: 3%;
+  padding-bottom: 0%;
 }
 
 button {
