@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>What is This?</title>
+    <meta name="Class Survey Family Feud">
+    <link rel="stylesheet" href="main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+
+</head>
+
+<body>
+
+  <div id="secret">
+    <img id="secretpicture" src="https://imgur.com/lw9DeJs.png">
+    <!-- <h1 id="secretword">Cat</h1> -->
+    <div id="buttons">
+      <button id="back" onclick=goBack()><h2>Back</h2></button>
+      <button id="next" onclick=goNext()><h2>Next</h2></button>
+    </div>
+  </div>
+
+  <div id="mydiv">
+    <img id="question" src="https://imgur.com/ia0l3eu.png">
+  </div>
+
+  <script>
+
+      // Make the DIV element draggable:
+    dragElement(document.getElementById("mydiv"));
+
+    function dragElement(elmnt) {
+      var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      if (document.getElementById(elmnt.id + "header")) {
+        // if present, the header is where you move the DIV from:
+        document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+      } else {
+        // otherwise, move the DIV from anywhere inside the DIV:
+        elmnt.onmousedown = dragMouseDown;
+      }
+
+      function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // get the mouse cursor position at startup:
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        // call a function whenever the cursor moves:
+        document.onmousemove = elementDrag;
+      }
+
+      function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // calculate the new cursor position:
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        // set the element's new position:
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+      }
+
+      function closeDragElement() {
+        // stop moving when mouse button is released:
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+
+    var images = ["https://imgur.com/lw9DeJs.png", "https://i.imgur.com/ps0JQSm.png", "https://i.imgur.com/jrAQyZ3.png", "https://i.imgur.com/lcEQhRW.png",
+    "https://imgur.com/3X8fYXE.png",
+    "https://imgur.com/naMfVyU.png",
+    "https://imgur.com/28keOWV.png",
+    "https://imgur.com/ACew4e1.png",
+    "https://imgur.com/DpMUBnX.png",
+    "https://imgur.com/rTTozac.png",
+    "https://imgur.com/JKpp65d.png",
+    "https://imgur.com/547C7dG.png",
+    "https://imgur.com/vSN6fC1.png",
+    "https://imgur.com/7AgbyBj.png",
+    "https://imgur.com/lw9DeJs.png"
+    ];
+    var currentImage = 0; //defaults to image1.jpg
+
+    function goNext() {
+        currentImage += 1;
+        document.getElementById("secretpicture").src = images[currentImage];
+    }
+
+    function goBack() {
+        currentImage -= 1;
+
+        //loop back to the first image
+        if(currentImage <= 0) {
+            currentImage = 0;
+        }
+
+        document.getElementById("secretpicture").src = images[currentImage];
+    }
+
+  </script>
+
+</body>
+
+</html>
